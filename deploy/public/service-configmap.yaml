@@ -1,0 +1,9 @@
+apiVersion: v1
+data:
+  druid.properties: "#\u516c\u53f8\u5f00\u53d1\r\njdbc.serverIP=10.103.168.189\r\njdbc.serverPort=3306\r\njdbc.dbName=uat_citycloud\r\njdbc.user=uat_citycloud\r\njdbc.password=sunwenbo\r\n\r\n\r\njdbc.initialSize=1\r\njdbc.minIdle=1\r\njdbc.maxActive=5\r\njdbc.maxWait=60000\r\njdbc.timeBetweenEvictionRunsMillis=60000\r\njdbc.minEvictableIdleTimeMillis=300000\r\njdbc.maxPSCache=20\r\n"
+  dubbo.properties: "dubbo.registry=N/A\r\n#dubbo.registry=multicast://224.5.6.7:1234\r\n#dubbo.registry=zookeeper://192.168.1.220:2181\r\ndubbo.protocol.port=30166"
+  file.properties: "order.downfile.path=/app/deploy/downloadPagePath\r\norder.rcfile.path=/app/deploy/downloadPagePath\r\n"
+kind: ConfigMap
+metadata:
+  creationTimestamp: null
+  name: cityservice-configmap

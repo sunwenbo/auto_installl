@@ -1,0 +1,13 @@
+apiVersion: v1
+data:
+  druid.properties: "#\u5f00\u53d1\r\n#\u516c\u53f8\u5f00\u53d1\r\njdbc.serverIP=10.103.168.189\r\njdbc.serverPort=3306\r\njdbc.dbName=uat_citycloud\r\njdbc.user=uat_citycloud\r\njdbc.password=sunwenbo\r\n\r\njdbc.initialSize=1\r\njdbc.minIdle=1\r\njdbc.maxActive=5\r\njdbc.maxWait=60000\r\njdbc.timeBetweenEvictionRunsMillis=60000\r\njdbc.minEvictableIdleTimeMillis=300000\r\njdbc.maxPSCache=20\r\n"
+  dubbo.properties: "dubbo.registry=N/A\r\ndubbo.protocol.port=30165"
+  file.properties: "#cityconsole   tomcate的IP以及端口\r\ntomc_cityconsole_ip=127.0.0.1\r\ntomc_cityconsole_port=8080\r\n#citycustomservice
+    \  tomcate的IP以及端口\r\ntomc_citycustomservice_ip=127.0.0.1\r\ntomc_citycustomservice_port=8081\r\n#citypriv
+    \  tomcate的IP以及端口\r\ntomc_citypriv_ip=127.0.0.1\r\ntomc_citypriv_port=8082\r\n"
+  redis.properties: "#\u6d4b\u8bd5\u5185\r\nredis.hostName=10.105.213.151\r\nredis.port=6379:30379/TCP\r\n\r\nredis.password=\r\nredis.timeout=10000\r\n"
+kind: ConfigMap
+metadata:
+  creationTimestamp: null
+  name: citypriv-configmap
+

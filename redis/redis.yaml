@@ -1,0 +1,77 @@
+apiVersion: v1
+kind: Service
+metadata:
+
+  name: redis
+  labels:
+    app: redis
+spec:
+  type: NodePort
+  ports:
+    - port: 6379
+      targetPort: 6379
+      nodePort: 30379
+  selector:
+    app: redis
+---
+
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: redis
+  labels:
+    app: redis
+  annotations:
+    security.alpha.kubernetes.io/unsafe-sysctls: net.core.somaxconn=65535
+spec:
+  #securityContext:
+    #privileged: true
+  serviceName: redis
+  replicas: 1
+  selector:
+    matchLabels:
+      app: redis
+  template:
+    metadata:
+      labels:
+        app: redis
+        #net:
+          #core:
+            #somaxconn=511:
+    spec:
+      containers:
+        - name: redis
+          image: redis:latest
+          imagePullPolicy: IfNotPresent
+          resources:
+            limits:
+              cpu: 1
+              memory: 4000Mi
+            requests:
+              cpu: 500m
+              memory: 4000Mi
+          env:
+            - name: TZ
+              value: Asia/Shanghai
+          command: ["redis-server","/usr/local/etc/redis/redis.conf","--appendonly yes"]
+#          lifecycle:
+#            postStart:
+#              exec:
+#                command: ["/bin/bash", "-c", "echo 511 > /proc/sys/net/core/somaxconn; echo never > /sys/kernel/mm/transparent_hugepage/enabled;"]
+          ports:
+            - containerPort: 6379
+          volumeMounts:
+            - name: redis-conf
+              mountPath: /usr/local/etc/redis
+            - name: redis-data
+              mountPath: /data
+      volumes:
+        - name: redis-conf
+          hostPath:
+            path: /root/job/redis/conf
+            type: Directory
+        - name: redis-data
+          hostPath:
+              path: /root/job/redis/data
+              type: Directory
+

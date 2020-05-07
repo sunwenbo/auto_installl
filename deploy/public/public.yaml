@@ -1,0 +1,62 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: public-service
+spec:
+  type: ClusterIP
+  selector:
+    app: public
+  ports:
+    - name: public1
+      protocol: TCP
+      port: 8080
+      targetPort: 8080
+    - name: public2
+      protocol: TCP
+      port: 30164
+      targetPort: 30164
+    - name: public3
+      protocol: TCP
+      port: 30166
+      targetPort: 30166
+
+---
+apiVersion: apps/v1beta1
+kind: Deployment
+metadata:
+   name: public
+spec:
+  selector:
+    matchLabels:
+      app: public
+  template:
+    metadata:
+      labels:
+        app: public
+    spec:
+      nodeSelector:
+        citycloud: citycloud
+      containers:
+      - image: mytomcat:v3.0
+        imagePullPolicy: IfNotPresent
+        name: public
+        ports:
+        - containerPort: 8080
+          name: public
+        volumeMounts:
+        - name: public-storage
+          mountPath: /opt/apache-tomcat-7.0.55/webapps/
+        - name: service-configmap
+          mountPath: /opt/env/cityservice
+        - name: csservice-configmap
+          mountPath: /opt/env/citycsservice
+      volumes:
+      - name: public-storage
+        persistentVolumeClaim:
+          claimName: public-pvc
+      - name: service-configmap
+        configMap: 
+          name: citysevice-configmap
+      - name: csservice-configmap
+        configMap: 
+          name: citycsservice-configmap

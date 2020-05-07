@@ -1,0 +1,12 @@
+apiVersion: v1
+data:
+  dubbo.properties: "dubbo.registry=N/A\r\n#dubbo.registry=zookeeper://192.168.1.220:2181\r\ndubbo.timeout=60000\r\ndubbo.reference.privilige=dubbo://priv-service:30165/jieyi.app.dubbo.PriviligeService\r\ndubbo.reference.center=dubbo://public-service:30166/jieyi.app.dubbo.ConsoleService\r\ndubbo.reference.centerfiletrans=dubbo://public-service:30166/jieyi.app.dubbo.FileTransService\r\ndubbo.reference.jdbc=dubbo://public-service:30166/jieyi.app.dubbo.JDBCDaoService\r\ndubbo.reference.logonservice=dubbo://priv-service:30165/jieyi.app.dubbo.LogonService\r\n#dubbo.reference.filedownload=dubbo://127.0.0.1:30258/jieyi.dbconsole.dubbo.BizProccessService\r\n"
+  file.properties: "order.downfile.path=/app/deploy/filetmp\r\norder.rcfile.path=/app/deploy/filetmp\r\nbcandyzcard.file.path=/app/deploy/filetmp\r\n\r\n#cityconsole
+    \  tomcate的IP以及端口\r\ntomc_cityconsole_ip=127.0.0.1\r\ntomc_cityconsole_port=8080\r\n#citycustomservice
+    \  tomcate的IP以及端口\r\ntomc_citycustomservice_ip=127.0.0.1\r\ntomc_citycustomservice_port=8081\r\n#citypriv
+    \  tomcate的IP以及端口\r\ntomc_citypriv_ip=127.0.0.1\r\ntomc_citypriv_port=8082\r\nlayout.upfile.path=/app/deploy/rec\r\n#短信发送配置文件\r\nsms.url=http://113.108.68.228:8001/sendSMS.action\r\nsms.userid=admin\r\nsms.companyid=17451\r\nsms.password=81235chdt\r\nsms.validtime=5\r\n#############################################################\r\n#############################################################\r\n#############################################################\r\n#############################################################\r\n#############################################################\r\n"
+  otherconfig.properties: "#\u516c\u53f8\u6d4b\u8bd5\r\ncommunicate.corectlip=127.0.0.1\r\ncommunicate.corectlport=9600\r\nIINS=31048211\r\niss_inst_no=01355850\r\nacqinst=11355850\r\ncardbin=31048701\r\n"
+kind: ConfigMap
+metadata:
+  creationTimestamp: null
+  name: cityconsole-configmap
